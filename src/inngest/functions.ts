@@ -1,8 +1,9 @@
 // src/inngest/functions.ts
 import { inngest } from "./client";
 import { OpenAI } from "openai";
-// You would create these DB functions to interact with Vercel Postgres
-// import { saveWebsiteJson, updateJobStatus } from "@/lib/db";
+import { saveWebsiteJson } from "@/lib/db";
+
+
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -31,7 +32,7 @@ export const generateWebsite = inngest.createFunction(
 
     // STEP 2: Generate content for each section of each page
     const finalSiteData = await step.run("2-generate-all-content", async () => {
-      let siteWithContent = { ...structure };
+      const siteWithContent = { ...structure };
 
       for (const page of siteWithContent.pages) {
         for (const section of page.sections) {
@@ -55,9 +56,8 @@ export const generateWebsite = inngest.createFunction(
 
     // STEP 3: Save the final result to the database
     await step.run("3-save-to-database", async () => {
-      // await saveWebsiteJson(siteId, finalSiteData);
-      // await updateJobStatus(siteId, 'COMPLETED');
-      console.log("Pretending to save to DB:", finalSiteData);
+      // Replace the old console.log with this call
+      await saveWebsiteJson(siteId, userId, finalSiteData);
     });
 
     return { message: "Website generated successfully!", siteId };

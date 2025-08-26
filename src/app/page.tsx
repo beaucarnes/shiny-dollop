@@ -27,12 +27,13 @@ export default function HomePage() {
       <div className="w-full max-w-xl">
         <h1 className="text-4xl font-bold text-center mb-6">AI Website Builder</h1>
         <form onSubmit={handleSubmit}>
-          <textarea
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="e.g., A modern website for a bakery in Brooklyn called 'Sweet Rise' with a menu and contact page"
-            className="w-full h-32 p-2 border rounded text-black"
-          />
+        <textarea
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="e.g., A modern website for a bakery..."
+          // Add text-black to fix the color issue
+          className="w-full h-32 p-2 border rounded text-black" 
+        />
           <button
             type="submit"
             className="w-full mt-4 bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
